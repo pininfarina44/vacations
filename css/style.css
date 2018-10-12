@@ -27,9 +27,9 @@ a, a:visited{
 
 div.main-table-container{
 	margin: 0 auto;
-	width:65%;
+
 }
-input#table-filter{
+input#search{
 	width:100%;
   	height: 40px;
   	font-size: 25px;
@@ -37,13 +37,13 @@ input#table-filter{
   	padding:2px;
   	border:0;
 }
-table{
+table.main-table{
 	width: 100%;
 	margin: 0 auto;
 	border-spacing: 0 15px;
 
 }
-tr{
+tr.main-table-header-row, tr.main-table-row{
 	margin: 30px;
 	border-right: 3px solid black;
 
@@ -55,8 +55,8 @@ td, th{
 
 }
 th{
-	padding: 8px 90px 8px 18px;
-	font-size: 18px;
+	padding: 8px 90px 0px 18px;
+	font-size: 23px;
 }
 td{
 	padding: 15px 90px 15px 20px;
