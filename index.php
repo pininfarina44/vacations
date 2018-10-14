@@ -38,8 +38,12 @@
 							echo "<tr class=\"employee-row\">";
 							echo "<td><form action=\"details.php\" method = \"post\">";
 							echo "<input type = \"submit\" value=\"Details\">";
-							echo "<input type=\"hidden\" name=\"var\" value=\"" . 
-								$row["employeeid"] . "\"></form></td>";
+							echo "<input type=\"hidden\" name=\"empID\" value=\"" . 
+								$row["employeeid"] . "\"></td>";
+							echo "<input type=\"hidden\" name=\"empName\" value=\"" . 
+								$row["name"] . "\"></td>";
+							echo "<input type=\"hidden\" name=\"empLastName\" value=\"" . 
+								$row["lastname"] . "\"></form></td>";
 							echo "<td id=\"name\">" . $row["name"] . "</td>";
 							echo "<td>" . $row["lastname"] . "</td>";
 							echo "<td>" . $row["sick"] . "</td>";

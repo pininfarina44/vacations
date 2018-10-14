@@ -2,12 +2,12 @@
 
 
 		<div class="vacation-table-container">
+		<h2><?php echo $_POST["empName"] . " " . $_POST["empLastName"];?></h2>
 		<table class="vacation-table">
 			<thead>
 				<tr class="vacation-table-header">
-					<th></th>
-					<th>Name</th>
-					<th>Last Name</th>
+					<th>Start date</th>
+					<th>End date</th>
 					<th>Personal</th>
 					<th>Sick</th>
 					<th>Vacation</th>
@@ -27,17 +27,33 @@
 						die("Connection failed : " . $conn->connect_error);
 					}
 
-					$sql = "SELECT vacationid, vacation.startdate, enddate, type 
+					$sql = "SELECT vacation.startdate, employee.personal, employee.sick, employee.vacation, vacation.enddate, vacation.type 
 							FROM vacation, employee
-							WHERE vacation.employee_employeeid = " . $_POST["var"];
+							WHERE vacation.employee_employeeid = " . $_POST["empID"];
+							echo $sql;
 					$result = $conn->query($sql);
 
 					if($result->num_rows > 0){
 						while ($row = $result->fetch_assoc()){
 							echo "<tr class=\"vacation-row\">";
-							echo "<td class=\"vacation-cell\">" . $row["type"] . "</td>";
 							echo "<td>" . $row["startdate"] . "</td>";
-							echo "<td>" . $row["enddate"] . "</td></tr>";
+							echo "<td>" . $row["enddate"] . "</td>";
+							echo "<td>" . $row["type"] . "</td>";
+							if($row["type"] = "personal"){
+								echo "<td>" . $row["personal"] . "</td>";
+								echo "<td>X</td>";
+								echo "<td>X</td></tr>";
+							}
+							else if($row["type"] = "sick"){
+								echo "<td>" . $row["sick"] . "</td>";
+								echo "<td>X</td>";
+								echo "<td>X</td></tr>";
+							}
+							else if($row["type"] = "vacation"){
+								echo "<td>" . $row["vacation"] . "</td>";
+								echo "<td>X</td>";
+								echo "<td>X</td></tr>";
+							}
 						}
 					}
 					else{
