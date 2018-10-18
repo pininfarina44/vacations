@@ -8,9 +8,7 @@
 				<tr class="vacation-table-header">
 					<th>Start date</th>
 					<th>End date</th>
-					<th>Personal</th>
-					<th>Sick</th>
-					<th>Vacation</th>
+					<th>Type</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,10 +25,12 @@
 						die("Connection failed : " . $conn->connect_error);
 					}
 
-					$sql = "SELECT vacation.startdate, employee.personal, employee.sick, employee.vacation, vacation.enddate, vacation.type 
+					$sql = "SELECT vacation.startdate, employee.personal, employee.sick, employee.vacation, 
+						vacation.enddate, vacation.type 
 							FROM vacation, employee
-							WHERE vacation.employee_employeeid = " . $_POST["empID"];
-							echo $sql;
+							WHERE vacation.employee_employeeid = " . $_POST["empID"] . 
+							" AND vacation.employee_employeeid = employee.employeeid";
+							
 					$result = $conn->query($sql);
 
 					if($result->num_rows > 0){
@@ -38,22 +38,20 @@
 							echo "<tr class=\"vacation-row\">";
 							echo "<td>" . $row["startdate"] . "</td>";
 							echo "<td>" . $row["enddate"] . "</td>";
-							echo "<td>" . $row["type"] . "</td>";
-							if($row["type"] = "personal"){
-								echo "<td>" . $row["personal"] . "</td>";
-								echo "<td>X</td>";
-								echo "<td>X</td></tr>";
-							}
-							else if($row["type"] = "sick"){
-								echo "<td>" . $row["sick"] . "</td>";
-								echo "<td>X</td>";
-								echo "<td>X</td></tr>";
-							}
-							else if($row["type"] = "vacation"){
-								echo "<td>" . $row["vacation"] . "</td>";
-								echo "<td>X</td>";
-								echo "<td>X</td></tr>";
-							}
+							echo "<td>" . $row["type"] . "</td></tr>";
+							function myGetType($row["startdate"])
+    {
+        if (is_array($var)) return "array";
+        if (is_bool($var)) return "boolean";
+        if (is_float($var)) return "float";
+        if (is_int($var)) return "integer";
+        if (is_null($var)) return "NULL";
+        if (is_numeric($var)) return "numeric";
+        if (is_object($var)) return "object";
+        if (is_resource($var)) return "resource";
+        if (is_string($var)) return "string";
+        return "unknown type";
+    }
 						}
 					}
 					else{
